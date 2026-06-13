@@ -7,12 +7,12 @@
     <style>
         /* Variáveis de Cores Premium */
         :root {
-            --bg-base: #000000;
-            --bg-card: rgba(18, 18, 20, 0.85);
-            --border-color: rgba(255, 255, 255, 0.1);
+            --bg-base: #07070a;
+            --bg-card: rgba(15, 15, 18, 0.9);
+            --border-color: rgba(255, 255, 255, 0.08);
             --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --accent-gold: #fbbf24;
+            --text-secondary: #8b949e;
+            --accent-gold: #eab308;
             --accent-red: #ef4444;
             --accent-green: #10b981;
             --btn-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
@@ -34,91 +34,95 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
-            background-image: radial-gradient(circle at 50% 0%, #1a1a24 0%, transparent 70%);
+            background-image: radial-gradient(circle at 50% -20%, #1a1a2e 0%, transparent 80%);
         }
 
-        /* Glassmorphism Container */
         .glass-panel {
             background: var(--bg-card);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--border-color);
-            border-radius: 20px;
+            border-radius: 16px;
             padding: 40px;
             width: 100%;
             max-width: 540px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.9);
             position: relative;
             overflow: hidden;
         }
 
         /* Tipografia */
-        h1 { font-size: 1.5rem; font-weight: 700; line-height: 1.3; margin-bottom: 15px; letter-spacing: -0.02em; }
-        .text-gradient { background: linear-gradient(to right, #f8fafc, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        h1 { font-size: 1.6rem; font-weight: 700; line-height: 1.3; margin-bottom: 12px; letter-spacing: -0.02em; }
+        .text-gradient { background: linear-gradient(to right, #ffffff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .subtitle { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 30px; line-height: 1.6; }
 
-        /* Badges de Autoridade */
+        /* Badges */
         .badge {
             display: inline-flex; align-items: center; gap: 6px;
-            background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color);
-            padding: 6px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 600;
-            text-transform: uppercase; letter-spacing: 1px; margin-bottom: 25px; color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color);
+            padding: 6px 14px; border-radius: 50px; font-size: 0.75rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 25px; color: var(--text-secondary);
         }
-        .badge.alert { border-color: rgba(239, 68, 68, 0.3); color: var(--accent-red); background: rgba(239, 68, 68, 0.05); }
+        .badge.alert { border-color: rgba(239, 68, 68, 0.4); color: var(--accent-red); background: rgba(239, 68, 68, 0.05); }
 
         /* Telas */
-        .screen { display: none; animation: fadeIn 0.4s ease-out forwards; }
+        .screen { display: none; animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .screen.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Progresso do Quiz */
+        .quiz-progress-container { width: 100%; height: 4px; background: rgba(255,255,255,0.05); border-radius: 2px; margin-bottom: 30px; overflow: hidden; }
+        .quiz-progress-fill { height: 100%; background: var(--text-secondary); width: 0%; transition: width 0.4s ease; }
 
         /* Opções do Quiz */
-        .options-grid { display: flex; flex-direction: column; gap: 12px; }
+        .options-grid { display: flex; flex-direction: column; gap: 10px; }
         .option-btn {
-            background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color);
-            color: var(--text-primary); padding: 18px 20px; border-radius: 12px;
-            font-size: 1rem; text-align: left; cursor: pointer; transition: all 0.2s ease;
-            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color);
+            color: var(--text-primary); padding: 18px 20px; border-radius: 10px;
+            font-size: 0.95rem; text-align: left; cursor: pointer; transition: all 0.2s ease;
+            display: flex; justify-content: space-between; align-items: center; line-height: 1.4;
         }
         .option-btn:hover {
-            background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.15);
             transform: translateX(4px);
         }
 
-        /* Botão Ação Premium */
+        /* Botões Base */
         .btn-primary {
             width: 100%; background: var(--btn-gradient); color: white;
-            border: none; padding: 18px; border-radius: 12px; font-size: 1.1rem;
+            border: none; padding: 18px; border-radius: 10px; font-size: 1.1rem;
             font-weight: 700; cursor: pointer; margin-top: 20px;
-            box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.4); transition: all 0.2s;
+            box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.3); transition: all 0.2s;
             text-transform: uppercase; letter-spacing: 0.5px;
         }
-        .btn-primary:hover { background: var(--btn-hover); transform: translateY(-2px); box-shadow: 0 15px 35px -5px rgba(16, 185, 129, 0.5); }
+        .btn-primary:hover { background: var(--btn-hover); transform: translateY(-2px); box-shadow: 0 15px 35px -5px rgba(16, 185, 129, 0.4); }
 
         /* Processamento Analítico (Autoridade) */
         .progress-bar { width: 100%; height: 6px; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden; margin: 30px 0; }
         .progress-fill { height: 100%; background: var(--accent-gold); width: 0%; box-shadow: 0 0 15px var(--accent-gold); transition: width 0.3s ease; }
-        .terminal { font-family: 'Courier New', Courier, monospace; font-size: 0.85rem; color: var(--accent-gold); margin-top: 20px; text-align: left; opacity: 0.8; height: 80px; }
+        .terminal { font-family: 'Courier New', Courier, monospace; font-size: 0.8rem; color: var(--accent-gold); margin-top: 20px; text-align: left; opacity: 0.8; height: 100px; line-height: 1.5; }
 
         /* Paywall (Medo e Urgência) */
         .danger-box {
-            background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2);
-            padding: 20px; border-radius: 12px; margin: 25px 0; text-align: left;
+            background: rgba(239, 68, 68, 0.03); border: 1px solid rgba(239, 68, 68, 0.2);
+            padding: 24px; border-radius: 12px; margin: 25px 0; text-align: left; border-left: 4px solid var(--accent-red);
         }
-        .danger-box p { color: #fca5a5; font-size: 0.95rem; line-height: 1.5; margin-bottom: 10px; }
+        .danger-box p { color: #e2e8f0; font-size: 0.95rem; line-height: 1.6; margin-bottom: 12px; }
+        .danger-box p:last-child { margin-bottom: 0; }
         
-        .timer-box { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 20px 0; font-size: 1.1rem; color: var(--accent-red); font-weight: 700; }
+        .timer-box { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 20px 0; font-size: 1.1rem; color: var(--accent-red); font-weight: 700; background: rgba(239, 68, 68, 0.05); padding: 12px; border-radius: 8px; }
         .blink { animation: blinker 1s linear infinite; }
         @keyframes blinker { 50% { opacity: 0; } }
 
-        .price-container { display: flex; align-items: baseline; justify-content: center; gap: 10px; margin: 25px 0; }
+        .price-container { display: flex; align-items: center; justify-content: center; gap: 15px; margin: 25px 0; }
         .price-old { text-decoration: line-through; color: var(--text-secondary); font-size: 1.1rem; }
-        .price-new { font-size: 2.5rem; font-weight: 800; color: var(--text-primary); letter-spacing: -1px; }
+        .price-new { font-size: 2.8rem; font-weight: 800; color: var(--text-primary); letter-spacing: -1.5px; }
 
-        /* Captura de WhatsApp */
+        /* Input */
         .input-group { margin: 20px 0; text-align: left; }
-        .input-group label { display: block; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .input-group label { display: block; font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
         .input-group input {
-            width: 100%; padding: 16px; background: rgba(0, 0, 0, 0.5); border: 1px solid var(--border-color);
+            width: 100%; padding: 16px; background: rgba(0, 0, 0, 0.4); border: 1px solid var(--border-color);
             border-radius: 10px; color: white; font-size: 1rem; outline: none; transition: border-color 0.2s;
         }
         .input-group input:focus { border-color: var(--accent-green); }
@@ -130,119 +134,159 @@
         
         <!-- TELA 1: INÍCIO DO QUIZ -->
         <div id="screen-quiz" class="screen active">
-            <div class="badge">⚙️ Inteligência Diagnóstica</div>
+            <div class="quiz-progress-container"><div class="quiz-progress-fill" id="quiz-progress"></div></div>
+            <div class="badge">Avaliação Clínica</div>
             <h1 id="q-title" class="text-gradient">Carregando avaliação...</h1>
-            <p class="subtitle" id="q-subtitle">Analisando padrões comportamentais.</p>
+            <p class="subtitle" id="q-subtitle">Iniciando protocolo de análise.</p>
             
-            <div class="options-grid" id="q-options">
-                <!-- Botões injetados via JS -->
-            </div>
+            <div class="options-grid" id="q-options"></div>
             
-            <div style="margin-top: 30px; font-size: 0.8rem; color: var(--text-secondary); text-align: center; border-top: 1px solid var(--border-color); padding-top: 15px;">
-                Passo <span id="q-step">1</span> de 4 • Sigilo Médico Garantido
+            <div style="margin-top: 25px; font-size: 0.75rem; color: var(--text-secondary); text-align: center;">
+                Análise Comportamental Silenciosa • Etapa <span id="q-step">1</span> de 8
             </div>
         </div>
 
-        <!-- TELA 2: PROCESSAMENTO (AUTORIDADE) -->
+        <!-- TELA 2: PROCESSAMENTO (AUMENTO DE AUTORIDADE) -->
         <div id="screen-loading" class="screen" style="text-align: center;">
-            <div class="badge">🧠 Processamento Neural</div>
-            <h1>Cruzando Dados...</h1>
-            <p class="subtitle">Analisando seu perfil contra nossa base de 14.392 pacientes.</p>
+            <div class="badge">Processamento em Nuvem</div>
+            <h1>Compilando Dossiê...</h1>
+            <p class="subtitle">Cruzando suas respostas com a matriz de disfunção neurológica.</p>
             
             <div class="progress-bar"><div class="progress-fill" id="loading-bar"></div></div>
             
             <div class="terminal" id="terminal-text">
-                > Iniciando varredura cognitiva...<br>
+                > Autenticando sessão...<br>
             </div>
         </div>
 
-        <!-- TELA 3: CAPTURA DO LEAD -->
+        <!-- TELA 3: CAPTURA DO LEAD (MICRO-COMPROMETIMENTO) -->
         <div id="screen-capture" class="screen" style="text-align: center;">
-            <div class="badge">✅ Análise Concluída</div>
-            <h1 class="text-gradient">Seu Dossiê foi gerado.</h1>
-            <p class="subtitle">Para garantir a privacidade dos seus dados sensíveis, enviaremos o link de acesso seguro direto no seu WhatsApp.</p>
+            <div class="badge">Relatório Bloqueado</div>
+            <h1 class="text-gradient">Uma anomalia foi detectada.</h1>
+            <p class="subtitle">O sistema identificou marcadores graves de autossabotagem. Por questões éticas, o diagnóstico prévio só será enviado para um contato seguro.</p>
             
             <div class="input-group">
-                <label>Seu melhor número (com DDD)</label>
+                <label>WhatsApp de Uso Pessoal (Com DDD)</label>
                 <input type="tel" id="whatsapp-input" placeholder="(11) 99999-9999" maxlength="15">
             </div>
             
-            <button class="btn-primary" onclick="processLead()">Avançar para o Diagnóstico ➔</button>
+            <button class="btn-primary" onclick="processLead()">Gerar Chave de Acesso ➔</button>
         </div>
 
-        <!-- TELA 4: PAYWALL (MEDO E ESCASSEZ) -->
+        <!-- TELA 4: PAYWALL (CHOQUE E ESCASSEZ EXTREMA) -->
         <div id="screen-paywall" class="screen" style="text-align: center;">
-            <div class="badge alert">⚠️ ALERTA DE RISCO DETECTADO</div>
-            <h1>Padrão de Falência Dopaminérgica Encontrado.</h1>
+            <div class="badge alert">⚠️ ESTÁGIO 3 DE SOBRECARGA DETECTADO</div>
+            <h1>O seu cérebro está em modo de "Sobrevivência".</h1>
             
             <div class="danger-box">
-                <p><strong>Diagnóstico Prévio:</strong> Suas respostas indicam um alto índice de Disfunção Executiva. O seu cérebro não está "preguiçoso", ele está operando com um bloqueio neuroquímico severo que impede a execução de tarefas.</p>
-                <p>Se este padrão não for quebrado, o ciclo de autossabotagem e estagnação financeira tenderá a piorar nos próximos 6 meses.</p>
+                <p><strong>Resultado da Triagem:</strong> Você não tem "problema de foco" ou "falta de força de vontade". Suas respostas confirmaram um padrão claro de <strong>Disfunção Executiva Severa</strong>.</p>
+                <p>A "névoa mental", a exaustão ao acordar e a paralisação diante de tarefas importantes são sintomas físicos de uma via dopaminérgica obstruída.</p>
+                <p>⚠️ <em>Atenção: Se este ciclo não for quebrado agora, a tendência natural é o desenvolvimento de quadros de ansiedade crônica e estagnação financeira absoluta nos próximos meses.</em></p>
             </div>
 
             <div class="timer-box">
-                <span class="blink">🔴</span> Seu dossiê será excluído em: <span id="timer">10:00</span>
+                <span class="blink">🔴</span> Seus dados serão apagados do servidor em: <span id="timer">10:00</span>
             </div>
 
-            <p class="subtitle" style="margin-bottom: 10px;">Taxa de Liberação do Servidor & Protocolo de Reversão:</p>
+            <p class="subtitle" style="margin-bottom: 5px; font-size: 0.85rem;">Liberação do Protocolo de Destrave + Dossiê Completo:</p>
             <div class="price-container">
                 <span class="price-old">R$ 197,00</span>
                 <span class="price-new">R$ 37,90</span>
             </div>
 
-            <!-- LINK DA KIWIFY AQUI -->
+            <!-- SUBSTITUA O LINK ABAIXO PELO SEU CHECKOUT DA KIWIFY -->
             <button class="btn-primary" onclick="window.location.href='https://pay.kiwify.com.br/SEULINKAQUI'">
-                💳 Desbloquear Meu Dossiê Agora
+                💳 Desbloquear Meu Diagnóstico e Solução
             </button>
             
-            <p style="margin-top: 20px; font-size: 0.75rem; color: var(--text-secondary);">
-                🔒 Pagamento 100% Seguro via Criptografia Bancária.
+            <p style="margin-top: 15px; font-size: 0.7rem; color: var(--text-secondary);">
+                🔒 AMBIENTE CRIPTOGRAFADO • ACESSO IMEDIATO APÓS PAGAMENTO
             </p>
         </div>
 
     </div>
 
     <script>
-        // Copy Agressivo nas Perguntas
+        // Copy Profundo - Psicologia de "Adivinhação"
         const questions = [
             {
-                title: "Como seu cérebro reage a tarefas importantes?",
-                sub: "Seja 100% honesto. Esta análise depende da sua sinceridade.",
+                title: "Como é a sua relação com a leitura de textos importantes ou longos?",
+                sub: "Módulo 1: Rastreio de Dispersão Visomotora",
                 options: [
-                    "Faço imediatamente o que precisa ser feito.",
-                    "Enrolo um pouco, mas entrego no prazo.",
-                    "Sinto uma 'parede invisível' e deixo tudo para a última hora.",
-                    "Eu paraliso. Foco em coisas inúteis e abandono o importante."
+                    "Leio e absorvo a informação de primeira.",
+                    "Perco a atenção às vezes, mas consigo terminar.",
+                    "Preciso reler a mesma linha várias vezes porque meus olhos passam pelas palavras, mas a mente está em outro lugar.",
+                    "Evito ao máximo. Só consigo focar em vídeos curtos ou resumos rápidos."
                 ]
             },
             {
-                title: "Qual o seu histórico com novos projetos ou ideias?",
-                sub: "Pense nos últimos 12 meses da sua vida.",
+                title: "Ao deitar na cama para dormir, como o seu cérebro se comporta?",
+                sub: "Módulo 2: Desligamento Neurológico",
                 options: [
-                    "Termino tudo que começo.",
-                    "Abandono apenas quando perde o sentido.",
-                    "Começo muito empolgado, mas a energia some em poucos dias.",
-                    "Tenho um cemitério de projetos inacabados e ideias geniais."
+                    "Desligo os pensamentos e durmo em poucos minutos.",
+                    "Demoro um pouco revisando o dia, mas pego no sono.",
+                    "Meu cérebro 'liga' de repente. Começo a ter ideias brilhantes, lembro de coisas antigas e a ansiedade bate.",
+                    "Sofro de insônia crônica. É impossível fazer minha mente calar a boca."
                 ]
             },
             {
-                title: "Como você se sente em relação ao seu próprio potencial?",
-                sub: "Avalie sua percepção interna de capacidade vs resultado.",
+                title: "Seja honesto: O que acontece quando você tem uma tarefa muito importante para entregar?",
+                sub: "Módulo 3: Resposta ao Estresse",
                 options: [
-                    "Estou exatamente onde deveria estar.",
-                    "Poderia estar melhor, mas estou evoluindo.",
-                    "Sinto que sou muito inteligente, mas meus resultados são medíocres.",
-                    "Vivo frustrado, vendo pessoas menos capazes passando na minha frente."
+                    "Planejo e executo antes do prazo.",
+                    "Enrolo um pouco, mas entrego sem grande estresse.",
+                    "Sinto uma paralisação bizarra. Fico arrumando a casa, rolando o feed, faço tudo, menos o que precisa ser feito.",
+                    "Só consigo fazer no desespero absoluto da última hora, movido a pânico."
                 ]
             },
             {
-                title: "Bateria Social e Cansaço Mental:",
-                sub: "Como é o seu nível de energia ao final de um dia comum?",
+                title: "Você já sentiu a 'Síndrome da Farsa' em relação à sua própria inteligência?",
+                sub: "Módulo 4: Percepção de Auto-Valor",
                 options: [
-                    "Normal, cansaço físico comum.",
-                    "Cansado, mas consigo interagir.",
-                    "Minha bateria acaba do nada e preciso me isolar.",
-                    "Acordo exausto. O simples fato de pensar em trabalhar já me drena."
+                    "Não, tenho confiança nos meus resultados e capacidade.",
+                    "Às vezes duvido de mim, mas é passageiro.",
+                    "Sim. Sinto que sou muito inteligente, mas na prática meus resultados não provam isso.",
+                    "O tempo todo. Sinto que estou desperdiçando meu potencial e vendo pessoas menos capazes passando na minha frente."
+                ]
+            },
+            {
+                title: "Quantas ideias geniais de negócios, projetos ou hobbies você abandonou nos últimos 12 meses?",
+                sub: "Módulo 5: Ciclo de Manutenção Dopaminérgica",
+                options: [
+                    "Nenhuma. Termino o que começo.",
+                    "1 ou 2, por falta de tempo real.",
+                    "Várias. Começo obcecado, compro materiais/cursos, mas em duas semanas a vontade some completamente.",
+                    "Perdi as contas. Minha vida é um verdadeiro 'cemitério' de projetos inacabados."
+                ]
+            },
+            {
+                title: "Como funciona a sua 'Bateria Social' em interações do dia a dia?",
+                sub: "Módulo 6: Exaustão Sensorial",
+                options: [
+                    "Sou extremamente sociável e ganho energia com pessoas.",
+                    "Gosto de interagir, mas prefiro meu espaço.",
+                    "Consigo interagir bem, mas minha bateria acaba 'do nada' e eu preciso fugir para me isolar e não falar com ninguém.",
+                    "Qualquer interação social já me drena antes mesmo de acontecer."
+                ]
+            },
+            {
+                title: "Com que frequência você se pega no 'loop' do celular sem perceber?",
+                sub: "Módulo 7: Sequestro de Atenção",
+                options: [
+                    "Raramente, controlo bem meu tempo de tela.",
+                    "Às vezes perco uns 20 minutos, mas saio fácil.",
+                    "Pego o celular só para olhar uma mensagem e quando percebo, já perdi 2 horas rolando vídeos sem absorver nada.",
+                    "É incontrolável. Sinto uma necessidade física de estímulo rápido na tela o tempo todo."
+                ]
+            },
+            {
+                title: "Como você se sente quando acorda e pensa no que precisa fazer hoje?",
+                sub: "Módulo 8: Avaliação Final de Exaustão",
+                options: [
+                    "Motivado e pronto para começar.",
+                    "Com preguiça normal de acordar, mas logo passa.",
+                    "Já acordo cansado. O peso das responsabilidades faz parecer que tem uma nuvem densa na minha cabeça.",
+                    "Sinto vontade de chorar ou desaparecer. A sensação de sobrecarga é esmagadora desde o primeiro minuto do dia."
                 ]
             }
         ];
@@ -255,6 +299,10 @@
                 return;
             }
 
+            // Atualiza barra de progresso
+            const progress = ((currentQ) / questions.length) * 100;
+            document.getElementById('quiz-progress').style.width = `${progress}%`;
+
             document.getElementById('q-title').innerText = questions[currentQ].title;
             document.getElementById('q-subtitle').innerText = questions[currentQ].sub;
             document.getElementById('q-step').innerText = currentQ + 1;
@@ -265,7 +313,7 @@
             questions[currentQ].options.forEach(opt => {
                 const btn = document.createElement('button');
                 btn.className = 'option-btn';
-                btn.innerHTML = `<span>${opt}</span> <span style="color:var(--text-secondary)">➔</span>`;
+                btn.innerHTML = `<span>${opt}</span> <span style="color:var(--text-secondary); font-size:1.2rem;">➔</span>`;
                 btn.onclick = () => {
                     currentQ++;
                     renderQuestion();
@@ -279,7 +327,6 @@
             document.getElementById(showId).classList.add('active');
         }
 
-        // Simulação de IA processando dados (Gatilho de Autoridade)
         function startProcessing() {
             switchScreen('screen-quiz', 'screen-loading');
             
@@ -287,39 +334,41 @@
             const term = document.getElementById('terminal-text');
             
             const messages = [
-                "> Isolando marcadores de procrastinação...",
-                "> Detectando picos de queda dopaminérgica...",
-                "> Cruzando dados do córtex pré-frontal...",
-                "> Finalizando relatório de risco neurocognitivo..."
+                "> Extraindo marcadores de procrastinação passiva...",
+                "> Anomalia detectada no córtex pré-frontal frontal.",
+                "> Calculando Índice de Perda Dopaminérgica...",
+                "> Cruzando com base de dados de 18.491 laudos...",
+                "> Isolando grau de risco de estagnação financeira...",
+                "> Finalizando criptografia do Dossiê Clínico..."
             ];
 
             let step = 0;
             const interval = setInterval(() => {
-                bar.style.width = `${(step + 1) * 25}%`;
+                bar.style.width = `${(step + 1) * 16.6}%`;
                 term.innerHTML += messages[step] + "<br>";
+                // Auto-scroll the terminal
+                term.scrollTop = term.scrollHeight;
                 step++;
                 
-                if(step >= 4) {
+                if(step >= 6) {
                     clearInterval(interval);
-                    setTimeout(() => switchScreen('screen-loading', 'screen-capture'), 1000);
+                    setTimeout(() => switchScreen('screen-loading', 'screen-capture'), 1500);
                 }
-            }, 1200);
+            }, 1000); // 6 segundos de loading gera ansiedade e aumenta autoridade
         }
 
-        // Validação simples de Lead e ida pro Paywall
         function processLead() {
             const wpp = document.getElementById('whatsapp-input').value;
-            if(wpp.length < 10) {
-                alert("Preencha um WhatsApp válido para garantir o envio.");
+            if(wpp.replace(/\D/g, '').length < 10) {
+                alert("O sistema de segurança exige um número de WhatsApp válido.");
                 return;
             }
             switchScreen('screen-capture', 'screen-paywall');
             startTimer();
         }
 
-        // Timer Escassez
         function startTimer() {
-            let time = 600; // 10 minutos
+            let time = 600; 
             const display = document.getElementById('timer');
             
             setInterval(() => {
@@ -332,7 +381,6 @@
             }, 1000);
         }
 
-        // Inicia o Quiz
         renderQuestion();
     </script>
 </body>
