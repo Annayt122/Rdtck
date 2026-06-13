@@ -1,30 +1,339 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Continuar</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: Arial, sans-serif;
-      background: #ffffff;
-    }
-    a {
-      padding: 18px 28px;
-      font-size: 18px;
-      text-decoration: none;
-      background: #000000;
-      color: #ffffff;
-      border-radius: 8px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapeamento de Disfunção Executiva</title>
+    <style>
+        /* Variáveis de Cores Premium */
+        :root {
+            --bg-base: #000000;
+            --bg-card: rgba(18, 18, 20, 0.85);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-gold: #fbbf24;
+            --accent-red: #ef4444;
+            --accent-green: #10b981;
+            --btn-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            --btn-hover: linear-gradient(135deg, #059669 0%, #047857 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background-image: radial-gradient(circle at 50% 0%, #1a1a24 0%, transparent 70%);
+        }
+
+        /* Glassmorphism Container */
+        .glass-panel {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 540px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Tipografia */
+        h1 { font-size: 1.5rem; font-weight: 700; line-height: 1.3; margin-bottom: 15px; letter-spacing: -0.02em; }
+        .text-gradient { background: linear-gradient(to right, #f8fafc, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 30px; line-height: 1.6; }
+
+        /* Badges de Autoridade */
+        .badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color);
+            padding: 6px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 1px; margin-bottom: 25px; color: var(--text-secondary);
+        }
+        .badge.alert { border-color: rgba(239, 68, 68, 0.3); color: var(--accent-red); background: rgba(239, 68, 68, 0.05); }
+
+        /* Telas */
+        .screen { display: none; animation: fadeIn 0.4s ease-out forwards; }
+        .screen.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Opções do Quiz */
+        .options-grid { display: flex; flex-direction: column; gap: 12px; }
+        .option-btn {
+            background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color);
+            color: var(--text-primary); padding: 18px 20px; border-radius: 12px;
+            font-size: 1rem; text-align: left; cursor: pointer; transition: all 0.2s ease;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .option-btn:hover {
+            background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.2);
+            transform: translateX(4px);
+        }
+
+        /* Botão Ação Premium */
+        .btn-primary {
+            width: 100%; background: var(--btn-gradient); color: white;
+            border: none; padding: 18px; border-radius: 12px; font-size: 1.1rem;
+            font-weight: 700; cursor: pointer; margin-top: 20px;
+            box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.4); transition: all 0.2s;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .btn-primary:hover { background: var(--btn-hover); transform: translateY(-2px); box-shadow: 0 15px 35px -5px rgba(16, 185, 129, 0.5); }
+
+        /* Processamento Analítico (Autoridade) */
+        .progress-bar { width: 100%; height: 6px; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden; margin: 30px 0; }
+        .progress-fill { height: 100%; background: var(--accent-gold); width: 0%; box-shadow: 0 0 15px var(--accent-gold); transition: width 0.3s ease; }
+        .terminal { font-family: 'Courier New', Courier, monospace; font-size: 0.85rem; color: var(--accent-gold); margin-top: 20px; text-align: left; opacity: 0.8; height: 80px; }
+
+        /* Paywall (Medo e Urgência) */
+        .danger-box {
+            background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2);
+            padding: 20px; border-radius: 12px; margin: 25px 0; text-align: left;
+        }
+        .danger-box p { color: #fca5a5; font-size: 0.95rem; line-height: 1.5; margin-bottom: 10px; }
+        
+        .timer-box { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 20px 0; font-size: 1.1rem; color: var(--accent-red); font-weight: 700; }
+        .blink { animation: blinker 1s linear infinite; }
+        @keyframes blinker { 50% { opacity: 0; } }
+
+        .price-container { display: flex; align-items: baseline; justify-content: center; gap: 10px; margin: 25px 0; }
+        .price-old { text-decoration: line-through; color: var(--text-secondary); font-size: 1.1rem; }
+        .price-new { font-size: 2.5rem; font-weight: 800; color: var(--text-primary); letter-spacing: -1px; }
+
+        /* Captura de WhatsApp */
+        .input-group { margin: 20px 0; text-align: left; }
+        .input-group label { display: block; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .input-group input {
+            width: 100%; padding: 16px; background: rgba(0, 0, 0, 0.5); border: 1px solid var(--border-color);
+            border-radius: 10px; color: white; font-size: 1rem; outline: none; transition: border-color 0.2s;
+        }
+        .input-group input:focus { border-color: var(--accent-green); }
+    </style>
 </head>
 <body>
-  <a href="https://t.me/suportexkl">Continuar</a>
+
+    <div class="glass-panel">
+        
+        <!-- TELA 1: INÍCIO DO QUIZ -->
+        <div id="screen-quiz" class="screen active">
+            <div class="badge">⚙️ Inteligência Diagnóstica</div>
+            <h1 id="q-title" class="text-gradient">Carregando avaliação...</h1>
+            <p class="subtitle" id="q-subtitle">Analisando padrões comportamentais.</p>
+            
+            <div class="options-grid" id="q-options">
+                <!-- Botões injetados via JS -->
+            </div>
+            
+            <div style="margin-top: 30px; font-size: 0.8rem; color: var(--text-secondary); text-align: center; border-top: 1px solid var(--border-color); padding-top: 15px;">
+                Passo <span id="q-step">1</span> de 4 • Sigilo Médico Garantido
+            </div>
+        </div>
+
+        <!-- TELA 2: PROCESSAMENTO (AUTORIDADE) -->
+        <div id="screen-loading" class="screen" style="text-align: center;">
+            <div class="badge">🧠 Processamento Neural</div>
+            <h1>Cruzando Dados...</h1>
+            <p class="subtitle">Analisando seu perfil contra nossa base de 14.392 pacientes.</p>
+            
+            <div class="progress-bar"><div class="progress-fill" id="loading-bar"></div></div>
+            
+            <div class="terminal" id="terminal-text">
+                > Iniciando varredura cognitiva...<br>
+            </div>
+        </div>
+
+        <!-- TELA 3: CAPTURA DO LEAD -->
+        <div id="screen-capture" class="screen" style="text-align: center;">
+            <div class="badge">✅ Análise Concluída</div>
+            <h1 class="text-gradient">Seu Dossiê foi gerado.</h1>
+            <p class="subtitle">Para garantir a privacidade dos seus dados sensíveis, enviaremos o link de acesso seguro direto no seu WhatsApp.</p>
+            
+            <div class="input-group">
+                <label>Seu melhor número (com DDD)</label>
+                <input type="tel" id="whatsapp-input" placeholder="(11) 99999-9999" maxlength="15">
+            </div>
+            
+            <button class="btn-primary" onclick="processLead()">Avançar para o Diagnóstico ➔</button>
+        </div>
+
+        <!-- TELA 4: PAYWALL (MEDO E ESCASSEZ) -->
+        <div id="screen-paywall" class="screen" style="text-align: center;">
+            <div class="badge alert">⚠️ ALERTA DE RISCO DETECTADO</div>
+            <h1>Padrão de Falência Dopaminérgica Encontrado.</h1>
+            
+            <div class="danger-box">
+                <p><strong>Diagnóstico Prévio:</strong> Suas respostas indicam um alto índice de Disfunção Executiva. O seu cérebro não está "preguiçoso", ele está operando com um bloqueio neuroquímico severo que impede a execução de tarefas.</p>
+                <p>Se este padrão não for quebrado, o ciclo de autossabotagem e estagnação financeira tenderá a piorar nos próximos 6 meses.</p>
+            </div>
+
+            <div class="timer-box">
+                <span class="blink">🔴</span> Seu dossiê será excluído em: <span id="timer">10:00</span>
+            </div>
+
+            <p class="subtitle" style="margin-bottom: 10px;">Taxa de Liberação do Servidor & Protocolo de Reversão:</p>
+            <div class="price-container">
+                <span class="price-old">R$ 197,00</span>
+                <span class="price-new">R$ 37,90</span>
+            </div>
+
+            <!-- LINK DA KIWIFY AQUI -->
+            <button class="btn-primary" onclick="window.location.href='https://pay.kiwify.com.br/SEULINKAQUI'">
+                💳 Desbloquear Meu Dossiê Agora
+            </button>
+            
+            <p style="margin-top: 20px; font-size: 0.75rem; color: var(--text-secondary);">
+                🔒 Pagamento 100% Seguro via Criptografia Bancária.
+            </p>
+        </div>
+
+    </div>
+
+    <script>
+        // Copy Agressivo nas Perguntas
+        const questions = [
+            {
+                title: "Como seu cérebro reage a tarefas importantes?",
+                sub: "Seja 100% honesto. Esta análise depende da sua sinceridade.",
+                options: [
+                    "Faço imediatamente o que precisa ser feito.",
+                    "Enrolo um pouco, mas entrego no prazo.",
+                    "Sinto uma 'parede invisível' e deixo tudo para a última hora.",
+                    "Eu paraliso. Foco em coisas inúteis e abandono o importante."
+                ]
+            },
+            {
+                title: "Qual o seu histórico com novos projetos ou ideias?",
+                sub: "Pense nos últimos 12 meses da sua vida.",
+                options: [
+                    "Termino tudo que começo.",
+                    "Abandono apenas quando perde o sentido.",
+                    "Começo muito empolgado, mas a energia some em poucos dias.",
+                    "Tenho um cemitério de projetos inacabados e ideias geniais."
+                ]
+            },
+            {
+                title: "Como você se sente em relação ao seu próprio potencial?",
+                sub: "Avalie sua percepção interna de capacidade vs resultado.",
+                options: [
+                    "Estou exatamente onde deveria estar.",
+                    "Poderia estar melhor, mas estou evoluindo.",
+                    "Sinto que sou muito inteligente, mas meus resultados são medíocres.",
+                    "Vivo frustrado, vendo pessoas menos capazes passando na minha frente."
+                ]
+            },
+            {
+                title: "Bateria Social e Cansaço Mental:",
+                sub: "Como é o seu nível de energia ao final de um dia comum?",
+                options: [
+                    "Normal, cansaço físico comum.",
+                    "Cansado, mas consigo interagir.",
+                    "Minha bateria acaba do nada e preciso me isolar.",
+                    "Acordo exausto. O simples fato de pensar em trabalhar já me drena."
+                ]
+            }
+        ];
+
+        let currentQ = 0;
+
+        function renderQuestion() {
+            if(currentQ >= questions.length) {
+                startProcessing();
+                return;
+            }
+
+            document.getElementById('q-title').innerText = questions[currentQ].title;
+            document.getElementById('q-subtitle').innerText = questions[currentQ].sub;
+            document.getElementById('q-step').innerText = currentQ + 1;
+
+            const grid = document.getElementById('q-options');
+            grid.innerHTML = '';
+            
+            questions[currentQ].options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerHTML = `<span>${opt}</span> <span style="color:var(--text-secondary)">➔</span>`;
+                btn.onclick = () => {
+                    currentQ++;
+                    renderQuestion();
+                };
+                grid.appendChild(btn);
+            });
+        }
+
+        function switchScreen(hideId, showId) {
+            document.getElementById(hideId).classList.remove('active');
+            document.getElementById(showId).classList.add('active');
+        }
+
+        // Simulação de IA processando dados (Gatilho de Autoridade)
+        function startProcessing() {
+            switchScreen('screen-quiz', 'screen-loading');
+            
+            const bar = document.getElementById('loading-bar');
+            const term = document.getElementById('terminal-text');
+            
+            const messages = [
+                "> Isolando marcadores de procrastinação...",
+                "> Detectando picos de queda dopaminérgica...",
+                "> Cruzando dados do córtex pré-frontal...",
+                "> Finalizando relatório de risco neurocognitivo..."
+            ];
+
+            let step = 0;
+            const interval = setInterval(() => {
+                bar.style.width = `${(step + 1) * 25}%`;
+                term.innerHTML += messages[step] + "<br>";
+                step++;
+                
+                if(step >= 4) {
+                    clearInterval(interval);
+                    setTimeout(() => switchScreen('screen-loading', 'screen-capture'), 1000);
+                }
+            }, 1200);
+        }
+
+        // Validação simples de Lead e ida pro Paywall
+        function processLead() {
+            const wpp = document.getElementById('whatsapp-input').value;
+            if(wpp.length < 10) {
+                alert("Preencha um WhatsApp válido para garantir o envio.");
+                return;
+            }
+            switchScreen('screen-capture', 'screen-paywall');
+            startTimer();
+        }
+
+        // Timer Escassez
+        function startTimer() {
+            let time = 600; // 10 minutos
+            const display = document.getElementById('timer');
+            
+            setInterval(() => {
+                let minutes = Math.floor(time / 60);
+                let seconds = time % 60;
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+                display.textContent = minutes + ":" + seconds;
+                if(time > 0) time--;
+            }, 1000);
+        }
+
+        // Inicia o Quiz
+        renderQuestion();
+    </script>
 </body>
 </html>
