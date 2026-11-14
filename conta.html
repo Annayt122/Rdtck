@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Acompanhar pedido | Wallace Imports</title>
+  <meta name="description" content="Consulte o andamento do seu pedido na Wallace Imports.">
+  <meta name="theme-color" content="#000000">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Wallace Imports">
+  <meta property="og:title" content="Acompanhar pedido | Wallace Imports">
+  <meta property="og:description" content="Consulte o andamento do seu pedido na Wallace Imports.">
+  <meta property="og:image" content="assets/img/compartilhar.jpg">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="preload" href="assets/fonts/nunito-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/lexend-exa-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/estilo.css">
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/catalogo.js"></script>
+  <script src="assets/js/loja.js"></script>
+</head>
+<body>
+  <div id="topo"></div>
+  <script>Loja.topo();</script>
+
+  <main id="conteudo">
+    <div class="container texto">
+      <nav class="migalhas" aria-label="Você está em"><a href="index.html">Início</a><span class="ponto">.</span><span>Acompanhar pedido</span></nav>
+      <h1>Acompanhar pedido</h1>
+      <div class="texto-corpo">
+        <p>Os pedidos da Wallace Imports são fechados e acompanhados pelo WhatsApp. Informe os dados abaixo e a nossa equipe responde com a situação do pedido e o código de rastreio.</p>
+        <form class="formulario" id="form-pedido" novalidate>
+          <label>Nome usado na compra<input class="campo" type="text" name="nome" autocomplete="name" required></label>
+          <label>Telefone ou número do pedido<input class="campo" type="text" name="pedido" inputmode="tel" required></label>
+          <p class="erro" role="alert" hidden></p>
+          <button class="btn" type="submit">Consultar pelo WhatsApp</button>
+        </form>
+        <h2>Precisa de outra coisa?</h2>
+        <ul>
+          <li><a href="trocas-e-devolucoes.html">Trocar ou devolver um produto</a></li>
+          <li><a href="perguntas-frequentes.html">Ver as perguntas frequentes</a></li>
+          <li><a href="contato.html">Falar com o atendimento</a></li>
+        </ul>
+      </div>
+    </div>
+  </main>
+  <noscript>
+    <p style="padding:40px 20px;text-align:center">Ative o JavaScript do navegador para ver a loja da Wallace Imports.</p>
+  </noscript>
+
+  <div id="rodape"></div>
+  <script>Loja.rodape();</script>
+</body>
+</html>

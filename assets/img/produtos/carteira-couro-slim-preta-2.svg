@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000"><defs>
+  <radialGradient id="chao" cx=".42" cy=".36" r=".85"><stop offset="0" stop-color="#aeaaa2"/><stop offset=".6" stop-color="#9a968e"/><stop offset="1" stop-color="#7f7b74"/></radialGradient>
+  <pattern id="trama" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(32)"><path d="M0 1H7" stroke="#000" stroke-width="1" opacity=".05"/><path d="M1 0V7" stroke="#fff" stroke-width="1" opacity=".05"/></pattern>
+  <linearGradient id="luz" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".1"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".16"/></linearGradient>
+  <linearGradient id="metal" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#000" stop-opacity=".22"/><stop offset=".3" stop-color="#fff" stop-opacity=".3"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".26"/></linearGradient>
+  <filter id="sombra" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur in="SourceAlpha" stdDeviation="13"/><feOffset dx="9" dy="16"/><feComponentTransfer><feFuncA type="linear" slope=".42"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs><rect width="800" height="1000" fill="url(#chao)"/><rect width="800" height="1000" fill="url(#trama)"/><g filter="url(#sombra)"><g transform="translate(400 690.5076923076923) rotate(-7) scale(2.280982905982906 2.280982905982906) translate(-400 -500)">
+      <rect x="186" y="326" width="448" height="318" rx="22" fill="#323235" stroke="#101012" stroke-width="1.5"/>
+      <rect x="166" y="352" width="448" height="322" rx="22" fill="#1b1b1e" stroke="#101012" stroke-width="1.5"/>
+      <rect x="166" y="352" width="448" height="322" rx="22" fill="url(#luz)"/>
+      <rect x="182" y="368" width="416" height="290" rx="14" fill="none" stroke="#f0c22b" stroke-width="2" stroke-dasharray="8 6" opacity=".7"/>
+      <g transform="translate(510 586) scale(0.6)" fill="none" stroke="#f0c22b" stroke-width="8" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M8 22 L28 64 L50 20 L72 64 L92 22"/><path d="M24 76 Q50 66 76 76"/>
+    <circle cx="8" cy="14" r="5" fill="#f0c22b" stroke="none"/><circle cx="50" cy="10" r="6" fill="#f0c22b" stroke="none"/><circle cx="92" cy="14" r="5" fill="#f0c22b" stroke="none"/>
+    <circle cx="30" cy="12" r="4" fill="#f0c22b" stroke="none"/><circle cx="70" cy="12" r="4" fill="#f0c22b" stroke="none"/>
+  </g></g></g></svg>

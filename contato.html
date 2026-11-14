@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fale conosco | Wallace Imports</title>
+  <meta name="description" content="Canais de atendimento da Wallace Imports: WhatsApp, e-mail e endereço.">
+  <meta name="theme-color" content="#000000">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Wallace Imports">
+  <meta property="og:title" content="Fale conosco | Wallace Imports">
+  <meta property="og:description" content="Canais de atendimento da Wallace Imports: WhatsApp, e-mail e endereço.">
+  <meta property="og:image" content="assets/img/compartilhar.jpg">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="preload" href="assets/fonts/nunito-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/lexend-exa-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/estilo.css">
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/catalogo.js"></script>
+  <script src="assets/js/loja.js"></script>
+</head>
+<body>
+  <div id="topo"></div>
+  <script>Loja.topo();</script>
+
+  <main id="conteudo">
+    <div class="container texto">
+      <nav class="migalhas" aria-label="Você está em"><a href="index.html">Início</a><span class="ponto">.</span><span>Fale conosco</span></nav>
+      <h1>Fale conosco</h1>
+      <div class="texto-corpo">
+        <p>O jeito mais rápido de falar com a gente é pelo WhatsApp. Atendimento: <span data-loja="horario"></span>.</p>
+        <div class="cartoes">
+          <div class="cartao"><span data-icone="whatsapp"></span><h2>WhatsApp</h2><p data-loja="whatsappExibicao"></p><a class="btn btn-p" data-zap="Olá! Vim pelo site da Wallace Imports." target="_blank" rel="noopener">Chamar agora</a></div>
+          <div class="cartao"><span data-icone="email"></span><h2>E-mail</h2><p data-loja="email"></p><a class="btn btn-p btn-contorno" data-email-botao>Escrever e-mail</a></div>
+          <div class="cartao"><span data-icone="local"></span><h2>Endereço</h2><p data-loja="endereco"></p></div>
+          <div class="cartao"><span data-icone="instagram"></span><h2>Instagram</h2><p>Novidades e reposições primeiro por lá.</p><a class="btn btn-p btn-contorno" data-instagram target="_blank" rel="noopener">Seguir a loja</a></div>
+        </div>
+        <h2>Mande sua mensagem</h2>
+        <form class="formulario" id="form-contato" novalidate>
+          <label>Seu nome<input class="campo" type="text" name="nome" autocomplete="name" required></label>
+          <label>Assunto
+            <select class="campo" name="assunto">
+              <option>Dúvida sobre produto</option><option>Pedido em andamento</option><option>Troca ou devolução</option><option>Outro assunto</option>
+            </select>
+          </label>
+          <label>Mensagem<textarea class="campo" name="mensagem" required></textarea></label>
+          <p class="erro" role="alert" hidden></p>
+          <button class="btn" type="submit">Enviar pelo WhatsApp</button>
+        </form>
+      </div>
+    </div>
+  </main>
+  <noscript>
+    <p style="padding:40px 20px;text-align:center">Ative o JavaScript do navegador para ver a loja da Wallace Imports.</p>
+  </noscript>
+
+  <div id="rodape"></div>
+  <script>Loja.rodape();</script>
+</body>
+</html>

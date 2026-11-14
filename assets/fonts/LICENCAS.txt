@@ -1,0 +1,5 @@
+Lexend Exa — Copyright 2019 The Lexend Project Authors (https://github.com/googlefonts/lexend)
+Nunito Sans — Copyright 2016 The Nunito Sans Project Authors (https://github.com/Fonthausen/NunitoSans)
+Anton — Copyright 2020 The Anton Project Authors (https://github.com/googlefonts/AntonFont.git)
+
+As três famílias são distribuídas sob a SIL Open Font License 1.1 (https://openfontlicense.org).
