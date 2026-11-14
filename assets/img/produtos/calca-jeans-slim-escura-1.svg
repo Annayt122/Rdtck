@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000"><defs>
+  <radialGradient id="chao" cx=".42" cy=".36" r=".85"><stop offset="0" stop-color="#aeaaa2"/><stop offset=".6" stop-color="#9a968e"/><stop offset="1" stop-color="#7f7b74"/></radialGradient>
+  <pattern id="trama" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(32)"><path d="M0 1H7" stroke="#000" stroke-width="1" opacity=".05"/><path d="M1 0V7" stroke="#fff" stroke-width="1" opacity=".05"/></pattern>
+  <linearGradient id="luz" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".1"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".16"/></linearGradient>
+  <linearGradient id="metal" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#000" stop-opacity=".22"/><stop offset=".3" stop-color="#fff" stop-opacity=".3"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".26"/></linearGradient>
+  <filter id="sombra" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur in="SourceAlpha" stdDeviation="13"/><feOffset dx="9" dy="16"/><feComponentTransfer><feFuncA type="linear" slope=".42"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs><rect width="800" height="1000" fill="url(#chao)"/><rect width="800" height="1000" fill="url(#trama)"/><g filter="url(#sombra)"><g transform="translate(400 480) rotate(0) scale(1.0292072322670376 1.0292072322670376) translate(-400 -524.5)">
+      <path d="M266 207 H534 L562 868 Q563 884 547 884 H442 Q428 884 427 870 L400 430 L373 870 Q372 884 358 884 H253 Q237 884 238 868 Z" fill="#243352" stroke="#161f31" stroke-width="1.5"/>
+      <path d="M266 207 H534 L562 868 Q563 884 547 884 H442 Q428 884 427 870 L400 430 L373 870 Q372 884 358 884 H253 Q237 884 238 868 Z" fill="url(#luz)"/>
+      <rect x="264" y="165" width="272" height="44" rx="4" fill="#243352" stroke="#161f31" stroke-width="1.5"/>
+      <g fill="#364360" stroke="#546078" stroke-width="1"><rect x="296" y="160" width="12" height="54" rx="2"/><rect x="492" y="160" width="12" height="54" rx="2"/><rect x="394" y="160" width="12" height="54" rx="2"/></g>
+      <circle cx="400" cy="187" r="8" fill="#c9a45a" opacity=".9"/>
+      <g fill="none" stroke="#c9a45a" stroke-width="2" stroke-dasharray="7 5" opacity=".8">
+        <path d="M284 209 Q290 268 344 276"/><path d="M516 209 Q510 268 456 276"/><path d="M400 209 V318 Q398 344 372 350"/>
+        <path d="M242 852 H370"/><path d="M430 852 H558"/>
+      </g>
+      <path d="M400 430 V320" stroke="#546078" stroke-width="1.6" opacity=".7"/></g></g><g transform="translate(600 880) rotate(-17)" filter="url(#sombra)">
+  <rect x="-82" y="-50" width="164" height="100" rx="5" fill="#0c0c0d"/>
+  <g transform="translate(-61 -20.400000000000002) scale(0.46)" fill="none" stroke="#f0c22b" stroke-width="9" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M8 22 L28 64 L50 20 L72 64 L92 22"/><path d="M24 76 Q50 66 76 76"/>
+    <circle cx="8" cy="14" r="5" fill="#f0c22b" stroke="none"/><circle cx="50" cy="10" r="6" fill="#f0c22b" stroke="none"/><circle cx="92" cy="14" r="5" fill="#f0c22b" stroke="none"/>
+    <circle cx="30" cy="12" r="4" fill="#f0c22b" stroke="none"/><circle cx="70" cy="12" r="4" fill="#f0c22b" stroke="none"/>
+  </g>
+  <g fill="#f4f1ea"><rect x="-4" y="-16" width="66" height="9" rx="1"/></g><rect x="-4" y="2" width="44" height="5" rx="1" fill="#9a968e"/>
+</g></svg>

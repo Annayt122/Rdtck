@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-30 -18 684 344" width="684" height="344"><defs>
+  <radialGradient id="chao" cx=".42" cy=".36" r=".85"><stop offset="0" stop-color="#aeaaa2"/><stop offset=".6" stop-color="#9a968e"/><stop offset="1" stop-color="#7f7b74"/></radialGradient>
+  <pattern id="trama" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(32)"><path d="M0 1H7" stroke="#000" stroke-width="1" opacity=".05"/><path d="M1 0V7" stroke="#fff" stroke-width="1" opacity=".05"/></pattern>
+  <linearGradient id="luz" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".1"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".16"/></linearGradient>
+  <linearGradient id="metal" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#000" stop-opacity=".22"/><stop offset=".3" stop-color="#fff" stop-opacity=".3"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".26"/></linearGradient>
+  <filter id="sombra" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur in="SourceAlpha" stdDeviation="13"/><feOffset dx="9" dy="16"/><feComponentTransfer><feFuncA type="linear" slope=".42"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs><g filter="url(#sombra)">
+      <path d="M60 214 C36 176 60 156 100 148 C160 136 205 122 240 104 L350 36 Q364 24 382 30 C400 58 432 84 470 84 C512 84 532 50 556 34 Q576 24 581 48 C592 112 600 170 604 214 C500 230 380 228 60 214 Z" fill="#18181a" stroke="#0e0e10" stroke-width="1.5"/>
+      <path d="M486 224 C492 160 520 108 580 60 C592 112 600 170 604 214 C560 222 520 224 486 224 Z" fill="#2a2a2e"/>
+      <path d="M60 214 C36 176 60 156 100 148 C128 142 150 138 166 134 C186 162 192 192 194 219 Z" fill="#2a2a2e" opacity=".85"/>
+      <path d="M60 214 C36 176 60 156 100 148 C160 136 205 122 240 104 L350 36 Q364 24 382 30 C400 58 432 84 470 84 C512 84 532 50 556 34 Q576 24 581 48 C592 112 600 170 604 214 C500 230 380 228 60 214 Z" fill="url(#luz)"/>
+      <path d="M240 104 L350 36 L372 62 L268 128 Z" fill="#0b0b0c"/>
+      <g stroke="#111113" stroke-width="8" stroke-linecap="round"><path d="M251.0 97.2 L282.6 118.8"/><path d="M273.0 83.6 L303.4 105.6"/><path d="M295.0 70.0 L324.2 92.4"/><path d="M317.0 56.4 L345.0 79.2"/><path d="M339.0 42.8 L365.8 66.0"/></g>
+      <path d="M382 30 C400 58 432 84 470 84 C512 84 532 50 556 34" fill="none" stroke="#0b0b0c" stroke-width="11" stroke-linecap="round"/>
+      <g fill="none" stroke="#4b4b4c" stroke-width="1.8" opacity=".8"><path d="M196 218 C300 184 400 136 470 88"/><path d="M268 128 C300 150 330 190 340 224"/></g>
+      <path d="M22 236 Q10 262 40 270 H588 Q612 268 610 244 L604 212 C500 228 380 226 60 212 Q32 212 22 236 Z" fill="#f3f3f1" stroke="#aaaaa9" stroke-width="1.5"/>
+      <path d="M30 250 H604" stroke="#c7c7c6" stroke-width="2"/>
+      <path d="M36 270 H592 Q594 286 580 286 H52 Q36 286 36 270 Z" fill="#616160"/></g></svg>
