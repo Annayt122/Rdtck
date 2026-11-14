@@ -48,15 +48,6 @@
           <p class="erro" role="alert" hidden></p>
           <button class="btn" type="submit">Enviar pelo WhatsApp</button>
         </form>
-        <script>
-          document.getElementById('form-contato').addEventListener('submit', function (ev) {
-            ev.preventDefault();
-            var f = ev.target, erro = f.querySelector('.erro');
-            if (!f.nome.value.trim() || !f.mensagem.value.trim()) { erro.hidden = false; erro.textContent = 'Preencha seu nome e a mensagem.'; return; }
-            erro.hidden = true;
-            window.open(Loja.zap('Olá! Sou ' + f.nome.value.trim() + '.\nAssunto: ' + f.assunto.value + '\n\n' + f.mensagem.value.trim()), '_blank', 'noopener');
-          });
-        </script>
       </div>
     </div>
   </main>

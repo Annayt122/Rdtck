@@ -20,6 +20,29 @@
   const guardar = (chave, valor) => { try { localStorage.setItem(chave, JSON.stringify(valor)); } catch (e) { /* navegação privada */ } };
   const lerGuardado = (chave, padrao) => { try { const v = JSON.parse(localStorage.getItem(chave)); return v == null ? padrao : v; } catch (e) { return padrao; } };
 
+  /* ------------------------------------------------------------------ rota e arquivos
+   * No site publicado, a página e os parâmetros vêm do endereço. Na prévia de página
+   * única (tools/gerar-previa.js) a rota fica em memória e os arquivos vêm embutidos. */
+  const UNICA = !!window.LOJA_PAGINA_UNICA;
+  let rotaMemoria = null;
+  const rota = () => rotaMemoria || { pagina: location.pathname.split('/').pop() || 'index.html', params: new URLSearchParams(location.search) };
+  const definirRota = (pagina, consulta) => { rotaMemoria = { pagina: pagina || 'index.html', params: new URLSearchParams(consulta || '') }; };
+  function gravarParams(params) {
+    const s = params.toString();
+    if (UNICA) { rotaMemoria = { pagina: rota().pagina, params: new URLSearchParams(s) }; return; }
+    history.replaceState(null, '', location.pathname + (s ? '?' + s : ''));
+  }
+  const paginas = {};
+  const registrar = (nome, montar) => { paginas[nome] = montar; if (!UNICA) montar(); };
+  const embutidos = window.LOJA_ARQUIVOS || null;
+  const arquivo = (caminho) => (embutidos && embutidos[caminho]) || caminho;
+  // Abre um endereço externo em outra aba sem depender de window.open.
+  function abrirLink(url) {
+    const a = doc.createElement('a');
+    a.href = url; a.target = '_blank'; a.rel = 'noopener';
+    doc.body.appendChild(a); a.click(); a.remove();
+  }
+
   const ICONES = {
     busca: '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.7-3.7"/>',
     usuario: '<circle cx="12" cy="8" r="4"/><path d="M4.5 20.5c.8-4 3.8-6 7.5-6s6.7 2 7.5 6"/>',
@@ -59,7 +82,7 @@
   const produto = (slug) => porSlug[slug] || null;
   const categoria = (slug) => C.categorias.find((c) => c.slug === slug) || null;
   const subcategoria = (cat, sub) => { const c = categoria(cat); return (c && c.filhos || []).find((f) => f.slug === sub) || null; };
-  const fotos = (p) => (p.fotos && p.fotos.length ? p.fotos : [1, 2, 3].map((n) => `assets/img/produtos/${p.slug}-${n}.svg`));
+  const fotos = (p) => (p.fotos && p.fotos.length ? p.fotos : [1, 2, 3].map((n) => `assets/img/produtos/${p.slug}-${n}.svg`)).map(arquivo);
   const linkProduto = (p) => 'produto.html?p=' + p.slug;
   const linkCat = (cat, sub) => 'produtos.html?cat=' + cat + (sub ? '&sub=' + sub : '');
   const disponivel = (p, tam) => !(p.sem || []).includes(tam);
@@ -186,12 +209,17 @@
     });
   }
   function ehAtual(link) {
-    const aqui = location.pathname.split('/').pop() || 'index.html';
+    const aqui = rota();
     const [pagina, consulta] = link.split('?');
-    if (pagina !== aqui) return false;
-    if (aqui !== 'produtos.html') return true;
-    const a = new URLSearchParams(location.search), b = new URLSearchParams(consulta || '');
+    if (pagina !== aqui.pagina) return false;
+    if (pagina !== 'produtos.html') return true;
+    const a = aqui.params, b = new URLSearchParams(consulta || '');
     return (a.get('cat') || '') === (b.get('cat') || '') && (a.get('lista') || '') === (b.get('lista') || '') && (!b.get('sub') || a.get('sub') === b.get('sub')) && !a.get('q');
+  }
+  function marcarMenu() {
+    $$('#cabecalho .nav-lista > li > a').forEach((a) => {
+      if (ehAtual(a.getAttribute('href'))) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+    });
   }
 
   function montarTopo() {
@@ -209,7 +237,7 @@
       <div class="container topo-barra">
         <button class="topo-icone so-celular" type="button" data-abrir="menu" aria-label="Abrir menu">${icone('menu')}</button>
         <a class="topo-logo" href="index.html" aria-label="Wallace Imports — página inicial">
-          <img src="assets/img/logo-horizontal.png" alt="Wallace Imports" width="993" height="272">
+          <img src="${arquivo('assets/img/logo-horizontal.png')}" alt="Wallace Imports" width="993" height="272">
         </a>
         <nav class="nav so-desktop" aria-label="Categorias">
           <button class="nav-seta" type="button" data-nav="-1" aria-label="Voltar o menu">${icone('esq')}</button>
@@ -287,7 +315,7 @@
           <li>${icone('local')}<span>${esc(L.endereco)}</span></li>
           <li>${icone('relogio')}<span>${esc(L.horario)}</span></li>`, 'rodape-contato aberta')}
         <div class="rodape-marca">
-          <img src="assets/img/logo-wallace-imports.png" alt="Wallace Imports" width="626" height="539" loading="lazy">
+          <img src="${arquivo('assets/img/logo-wallace-imports.png')}" alt="Wallace Imports" width="626" height="539" loading="lazy">
           <div class="redes">
             <a href="https://instagram.com/${esc(L.instagram)}" target="_blank" rel="noopener" aria-label="Instagram da Wallace Imports">${icone('instagram')}</a>
             <a href="${zap('Olá! Vim pelo site da Wallace Imports.')}" target="_blank" rel="noopener" aria-label="WhatsApp da Wallace Imports">${icone('whatsapp')}</a>
@@ -342,8 +370,27 @@
       retorno.hidden = false;
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { retorno.textContent = 'Confira o e-mail digitado e tente de novo.'; form.email.focus(); return; }
       retorno.textContent = 'Abrimos o WhatsApp para confirmar seu cadastro. É só enviar a mensagem.';
-      window.open(zap(`Olá! Quero receber as ofertas da Wallace Imports. Meu e-mail: ${email}`), '_blank', 'noopener');
+      abrirLink(zap(`Olá! Quero receber as ofertas da Wallace Imports. Meu e-mail: ${email}`));
       form.reset();
+    });
+
+    // formulários de contato e de acompanhamento de pedido: a mensagem segue pelo WhatsApp
+    doc.addEventListener('submit', (ev) => {
+      const f = ev.target;
+      if (f.id !== 'form-contato' && f.id !== 'form-pedido') return;
+      ev.preventDefault();
+      const contato = f.id === 'form-contato';
+      const erro = $('.erro', f);
+      const obrigatorios = contato ? [f.nome, f.mensagem] : [f.nome, f.pedido];
+      if (obrigatorios.some((c) => !c.value.trim())) {
+        erro.hidden = false;
+        erro.textContent = contato ? 'Preencha seu nome e a mensagem.' : 'Preencha os dois campos para localizarmos o pedido.';
+        return;
+      }
+      erro.hidden = true;
+      abrirLink(zap(contato
+        ? `Olá! Sou ${f.nome.value.trim()}.\nAssunto: ${f.assunto.value}\n\n${f.mensagem.value.trim()}`
+        : `Olá! Quero acompanhar meu pedido.\nNome: ${f.nome.value.trim()}\nTelefone/pedido: ${f.pedido.value.trim()}`));
     });
 
     preencher();
@@ -767,6 +814,8 @@
     cartao: cartao, vitrine: vitrine, ligarTrilhos: ligarTrilhos, precos: precos, etiquetas: etiquetas,
     caixaCompra: caixaCompra, ligarCaixa: ligarCaixa, blocoCep: blocoCep, ligarCep: ligarCep, metaFrete: metaFrete,
     abrir: abrir, fechar: fechar, abrirModal: abrirModal, calcular: calcular, itens: itensSalvos,
+    unica: UNICA, rota: rota, definirRota: definirRota, gravarParams: gravarParams, registrar: registrar, paginas: paginas,
+    arquivo: arquivo, abrirLink: abrirLink, preencher: preencher, marcarMenu: marcarMenu,
     topo: montarTopo, rodape: montarRodape
   };
 })();

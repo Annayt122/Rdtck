@@ -42,15 +42,6 @@
           <li><a href="perguntas-frequentes.html">Ver as perguntas frequentes</a></li>
           <li><a href="contato.html">Falar com o atendimento</a></li>
         </ul>
-        <script>
-          document.getElementById('form-pedido').addEventListener('submit', function (ev) {
-            ev.preventDefault();
-            var f = ev.target, erro = f.querySelector('.erro');
-            if (!f.nome.value.trim() || !f.pedido.value.trim()) { erro.hidden = false; erro.textContent = 'Preencha os dois campos para localizarmos o pedido.'; return; }
-            erro.hidden = true;
-            window.open(Loja.zap('Olá! Quero acompanhar meu pedido.\nNome: ' + f.nome.value.trim() + '\nTelefone/pedido: ' + f.pedido.value.trim()), '_blank', 'noopener');
-          });
-        </script>
       </div>
     </div>
   </main>

@@ -26,6 +26,7 @@ Abrir o `index.html` direto do disco também funciona para conferir o visual.
 | `assets/js/home.js`, `listagem.js`, `produto.js` | Montagem de cada página |
 | `assets/css/estilo.css` | Todo o visual |
 | `tools/gerar-ilustracoes.js` | Gera as imagens provisórias dos produtos |
+| `tools/gerar-previa.js` | Junta o site inteiro em um único HTML (`previa/index.html`) para mostrar onde só cabe um arquivo |
 
 Endereços: `produtos.html?cat=camisetas&sub=basicas`, `produtos.html?q=tenis`, `produtos.html?lista=mais-vendidos`, `produto.html?p=slug-do-produto`.
 

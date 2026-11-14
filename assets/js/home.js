@@ -39,8 +39,8 @@
 
   /* ---------- banner rotativo ---------- */
   function arte(tipo) {
-    const r = (nome, classe) => `<img class="${classe}" src="assets/img/recortes/${nome}.svg" alt="" loading="eager">`;
-    const coroa = '<img class="slide-coroa" src="assets/img/coroa.png" alt="" style="filter:none">';
+    const r = (nome, classe) => `<img class="${classe}" src="${J.arquivo('assets/img/recortes/' + nome + '.svg')}" alt="" loading="eager">`;
+    const coroa = `<img class="slide-coroa" src="${J.arquivo('assets/img/coroa.png')}" alt="" style="filter:none">`;
     switch (tipo) {
       case 'tenis': return `<div class="slide-arte arte-tenis"><span class="slide-placa">Black<br>Friday</span>${r('tenis-preto', 't1')}${r('tenis-branco', 't2')}</div>`;
       case 'camisetas': return `<div class="slide-arte arte-camisetas">${coroa}${r('camiseta-vermelha', 'c1')}${r('camiseta-branca', 'c2')}${r('camiseta-preta', 'c3')}</div>`;
@@ -88,7 +88,9 @@
       <div class="vitrine-pontos">${L.banners.map((b, i) => `<button type="button" aria-label="Banner ${i + 1} de ${L.banners.length}" aria-current="${i === 0}"></button>`).join('')}</div>
     </section>`;
   }
+  let pararRotativo = null;
   function ligarRotativo() {
+    if (pararRotativo) pararRotativo();
     const trilho = $('#rotativo'), area = trilho.parentElement;
     const pontos = $$('.vitrine-pontos button', area);
     const total = pontos.length;
@@ -110,7 +112,8 @@
     pontos.forEach((p, i) => p.addEventListener('click', () => { ir(i); tocar(); }));
     ['pointerenter', 'focusin', 'touchstart'].forEach((e) => area.addEventListener(e, parar, { passive: true }));
     ['pointerleave', 'focusout'].forEach((e) => area.addEventListener(e, tocar));
-    window.addEventListener('resize', () => ir(atual, false));
+    window.addEventListener('resize', () => { if (trilho.isConnected) ir(atual, false); });
+    pararRotativo = parar;
     tocar();
   }
 
@@ -131,7 +134,7 @@
     return `<a class="banner" href="${b.link}">
       <img class="banner-foto" src="${foto(b.foto, b.vista)}" alt="" width="800" height="1000" loading="lazy">
       <span class="banner-texto${b.marca ? ' marca' : ''}">
-        ${b.marca ? '<img class="banner-marca" src="assets/img/coroa.png" alt="" width="367" height="284" loading="lazy">' : ''}
+        ${b.marca ? `<img class="banner-marca" src="${J.arquivo('assets/img/coroa.png')}" alt="" width="367" height="284" loading="lazy">` : ''}
         <b>${esc(b.titulo)}</b><i>${esc(b.chamada)}</i>
       </span></a>`;
   }
@@ -162,7 +165,7 @@
   }
   function sobre() {
     return `<section class="sobre" id="sobre"><div class="container">
-      <img src="assets/img/coroa.png" alt="" width="367" height="284" loading="lazy">
+      <img src="${J.arquivo('assets/img/coroa.png')}" alt="" width="367" height="284" loading="lazy">
       <h2 class="titulo-grande">${esc(L.sobre.titulo)}</h2>
       <p>${esc(L.sobre.texto)}</p>
     </div></section>`;
@@ -184,30 +187,36 @@
   /* ---------- montagem ---------- */
   const promo = (chave) => maisVendidos(C.produtos.filter((p) => p.promo === chave));
   const P = C.promocoes;
-  $('#conteudo').innerHTML =
-    '<h1 class="so-leitor">Wallace Imports</h1>' +
-    rotativo() +
-    categorias() +
-    banners(BANNERS_MARCA, 'Coleções') +
-    J.vitrine(P['tenis-299'].nome, promo('tenis-299'), 4, J.linkCat(P['tenis-299'].cat, P['tenis-299'].sub)) +
-    J.vitrine('Destaques', maisVendidos(selo('destaque')), 4, 'produtos.html?lista=destaques') +
-    banners(BANNERS_PROMO, 'Promoções') +
-    vantagens() +
-    J.vitrine(P['premium-149'].nome, promo('premium-149'), 6, J.linkCat(P['premium-149'].cat, P['premium-149'].sub)) +
-    J.vitrine(P['camisetas-119'].nome, promo('camisetas-119'), 6, J.linkCat(P['camisetas-119'].cat, P['camisetas-119'].sub)) +
-    banners(BANNERS_NOVIDADES, 'Novidades') +
-    ofertas() +
-    sobre() +
-    video();
 
-  ligarRotativo();
-  J.ligarTrilhos($('#conteudo'));
+  function montar() {
+    document.title = 'Wallace Imports | Tênis, camisetas e acessórios importados';
+    $('#conteudo').innerHTML =
+      '<h1 class="so-leitor">Wallace Imports</h1>' +
+      rotativo() +
+      categorias() +
+      banners(BANNERS_MARCA, 'Coleções') +
+      J.vitrine(P['tenis-299'].nome, promo('tenis-299'), 4, J.linkCat(P['tenis-299'].cat, P['tenis-299'].sub)) +
+      J.vitrine('Destaques', maisVendidos(selo('destaque')), 4, 'produtos.html?lista=destaques') +
+      banners(BANNERS_PROMO, 'Promoções') +
+      vantagens() +
+      J.vitrine(P['premium-149'].nome, promo('premium-149'), 6, J.linkCat(P['premium-149'].cat, P['premium-149'].sub)) +
+      J.vitrine(P['camisetas-119'].nome, promo('camisetas-119'), 6, J.linkCat(P['camisetas-119'].cat, P['camisetas-119'].sub)) +
+      banners(BANNERS_NOVIDADES, 'Novidades') +
+      ofertas() +
+      sobre() +
+      video();
 
-  const botaoVideo = $('#video');
-  if (botaoVideo) botaoVideo.addEventListener('click', () => {
-    const quadro = document.createElement('div');
-    quadro.className = 'video-quadro';
-    quadro.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(L.video.youtubeId)}?autoplay=1&rel=0" title="Vídeo da Wallace Imports" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
-    botaoVideo.replaceWith(quadro);
-  });
+    ligarRotativo();
+    J.ligarTrilhos($('#conteudo'));
+
+    const botaoVideo = $('#video');
+    if (botaoVideo) botaoVideo.addEventListener('click', () => {
+      const quadro = document.createElement('div');
+      quadro.className = 'video-quadro';
+      quadro.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(L.video.youtubeId)}?autoplay=1&rel=0" title="Vídeo da Wallace Imports" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+      botaoVideo.replaceWith(quadro);
+    });
+  }
+
+  J.registrar('index.html', montar);
 })();
